@@ -1,7 +1,7 @@
 <?php
 session_start();
 // delete account image 
-if (unlink("./imgs/account.jpg")) {
+if (unlink("./imgs/account.png")) {
     echo "Image deleted";
 } else {
     echo "Erreur Deleting Image";

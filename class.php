@@ -9,8 +9,9 @@ if (isset($_SESSION['id'])) {
   require_once  "db_connect.php";
 
   $class_id = $_GET['id'];
-  $result = $conn->query("SELECT name, image FROM classes WHERE id = " . $class_id);
+  $result = $conn->query("SELECT name, code, image FROM classes WHERE id = " . $class_id);
   $row = $result->fetch_assoc();
+  $class_code = $row["code"];
   $class_title = str_replace("<br>", " ", $row["name"]);
   // copy the img to the local
   $org = $row["image"];
@@ -71,9 +72,10 @@ if (isset($_SESSION['id'])) {
           <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-3" id="account">
             <div class="dropdown-account">
               <button class="drop-btn" type="button">
-                <img src="./imgs/account.jpg" class="account-img" alt="" />
+                <img src="./imgs/account.png" class="account-img" alt="" />
               </button>
               <div class="dropdown-account-content">
+                <a href="index.php">Home</a><br>
                 <a href="logout.php">Log out</a>
               </div>
             </div>
@@ -82,149 +84,207 @@ if (isset($_SESSION['id'])) {
       </div>
     </nav>
   </header>
+
   <!-- Main  -->
-  <main class="container class-container">
-    <div class="row">
-      <div class="col-lg-11">
-        <div class="img-container ms-5 w-100"></div>
-      </div>
-    </div>
-    <div class="content-container ms-5 w-100">
-      <div class="row post-row-1">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6 post-container">
-          <img src="imgs/account.jpg" class="account-img" alt="">
-          <button type="button" id="create-post-btn" class="annouce-btn">annouce something to your class</button>
-        </div>
-        <div class="col-lg-3"></div>
-      </div>
-      <div class="row post-row-2 hidden">
-        <form class="post-input-container" action=<?php echo "add_post.php?class_id=" . $class_id ?> method="POST">
-          <textarea name="post-content" placeholder="announce something to your class" class="post-input"></textarea>
-          <label for="file-upload" class="custom-file-upload">
-            <i class="fas fa-cloud-upload-alt"><span>Upload File</span></i>
-          </label>
-          <input id="file-upload" type="file" />
-          <input type="submit" class="btn-submit" value="Post" disabled>
-          <input type="button" class="btn-cancel" value="Cancel">
-        </form>
-      </div>
+  <main>
+    <section class="container class-container" id="stream">
       <div class="row">
         <div class="col-lg-11">
-          <?php
-
-          require_once "db_connect.php";
-
-          $sql = "SELECT posts.* FROM posts WHERE posts.class_id = " . $class_id . " ORDER BY posts.last_updated DESC";
-
-          $result = $conn->query($sql);
-
-          if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-              $post_id = $row["id"];
-
-          ?>
-              <article class="post">
-                <div class="post-info">
-                  <?php
-                  $res = $conn->query("SELECT id, name, account_image FROM users WHERE id = " . $row["user_id"]);
-                  $user_row = $res->fetch_assoc();
-                  // copy the poster image to loclahost
-                  $poster_img = "./imgs/" . $user_row["name"] . ".png";
-                  copy($user_row["account_image"], $poster_img);
-                  echo "<img src='" . $poster_img . "'>";
-                  echo "<div>";
-                  echo "<span>" . $user_row["name"] . "</span>";
-                  echo "<br>" . "<span>" . $row["last_updated"] . "</span>";
-                  echo "</div>";
-                  ?>
-                </div>
-                <hr>
-                <div class="post-desciption">
-                  <p>
-                    <?php
-                    $text = nl2br($row["content"]);
-
-                    $text = preg_replace_callback(
-                      "/https?:\/\/[^\s]+/",
-                      function ($match) {
-                        return "<a href='" . $match[0] . "'>" . $match[0] . "</a>";
-                      },
-                      $text
-                    );
-
-                    echo $text;
-                    ?>
-                  </p>
-                </div>
-                <hr>
-                <form class="post-comment-container" action=<?php echo "add_comment.php?post_id=" . $post_id ?> method="POST">
-                  <img src="imgs/account.jpg" class="account-img" alt="">
-                  <input type="text" name="comment" id="comment" class="post-comment-input">
-                  <input type="submit" value="Post">
-                </form>
-                <!-- check if they are some comments for that post -->
-                <?php
-
-
-                $sql = "SELECT * FROM comments WHERE comments.post_id = " . $post_id;
-
-                $comments_res = $conn->query($sql);
-
-                if ($comments_res->num_rows > 0) {
-                ?>
-                  <hr>
-                  <div class="post-comments-container">
-                    <?php
-                    while ($comments_row = $comments_res->fetch_assoc()) {
-                    ?>
-                      <div class="comment-container">
-                        <!-- PHP WORK here  -->
-                        <?php
-                        $user_comment_res =  $conn->query("SELECT name, account_image FROM users WHERE users.id = " . $comments_row["user_id"]);
-                        if ($user_comment_res->num_rows > 0) {
-                          $user_comment_row = $user_comment_res->fetch_assoc();
-                          $user_comment_img = $user_comment_row["account_image"];
-                          $user_comment_name = $user_comment_row["name"];
-                          copy($user_comment_img, "./imgs/" . $user_comment_name . ".png");
-                        }
-                        ?>
-                        <!-- comments shows  here  -->
-                        <img src=<?php echo "'./imgs/" . $user_comment_name . ".png'" ?> alt="">
-                        <div>
-                          <span class="comment-user-name"><?php echo $user_comment_name ?></span>
-                          <p class="comment-content">
-                            <?php
-                            $text =  $comments_row["content"];
-
-                            $text = preg_replace_callback(
-                              "/https?:\/\/[^\s]+/",
-                              function ($match) {
-                                return "<a href='" . $match[0] . "' style='text-decoration: underline; font-weight: 400; '>" . $match[0] . "</a>";
-                              },
-                              $text
-                            );
-
-                            echo $text;
-                            ?>
-                          </p>
-                        </div>
-                      </div>
-                  <?php
-                    }
-                    echo "</div>";
-                  }
-                  ?>
-
-              </article>
-          <?php
-            }
-          }
-          ?>
+          <div class="img-container ms-5 w-100"></div>
         </div>
       </div>
-    </div>
+      <div class="content-container ms-5 w-100">
+        <div class="row post-row-1">
+          <div class="col-lg-1"></div>
+
+          <?php if ($role === "teacher") { ?>
+            <div class="col-lg-2 class-code-show">
+              <h5>Class Code : </h5>
+              <p style="color: #222; text-align: center; font-size: 1.5rem"><?php echo $class_code;  ?></p>
+            </div>
+          <?php } else { ?>
+            <div class="col-lg-2"></div>
+          <?php } ?>
+
+          <div class="col-lg-6 post-container">
+            <img src="imgs/account.png" class="account-img" alt="">
+            <button type="button" id="create-post-btn" class="annouce-btn">annouce something to your class</button>
+          </div>
+          <div class="col-lg-3"></div>
+        </div>
+        <div class="row post-row-2 hidden">
+          <form class="post-input-container" action=<?php echo "add_post.php?class_id=" . $class_id ?> method="POST">
+            <textarea name="post-content" placeholder="announce something to your class" class="post-input"></textarea>
+            <label for="file-upload" class="custom-file-upload">
+              <i class="fas fa-cloud-upload-alt"><span>Upload File</span></i>
+            </label>
+            <input id="file-upload" type="file" />
+            <input type="submit" class="btn-submit" value="Post" disabled>
+            <input type="button" class="btn-cancel" value="Cancel">
+          </form>
+        </div>
+        <div class="row">
+          <div class="col-lg-11">
+            <?php
+
+            require_once "db_connect.php";
+
+            $sql = "SELECT posts.* FROM posts WHERE posts.class_id = " . $class_id . " ORDER BY posts.last_updated DESC";
+
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                $post_id = $row["id"];
+
+            ?>
+                <article class="post">
+                  <div class="post-info">
+                    <?php
+                    $res = $conn->query("SELECT id, name, account_image FROM users WHERE id = " . $row["user_id"]);
+                    $user_row = $res->fetch_assoc();
+                    // copy the poster image to loclahost
+                    $poster_img = "./imgs/" . $user_row["name"] . ".png";
+                    copy($user_row["account_image"], $poster_img);
+                    echo "<img src='" . $poster_img . "'>";
+                    echo "<div>";
+                    echo "<span>" . $user_row["name"] . "</span>";
+                    echo "<br>" . "<span>" . $row["last_updated"] . "</span>";
+                    echo "</div>";
+                    ?>
+                  </div>
+                  <hr>
+                  <div class="post-desciption">
+                    <p>
+                      <?php
+                      $text = nl2br($row["content"]);
+
+                      $text = preg_replace_callback(
+                        "/https?:\/\/[^\s]+/",
+                        function ($match) {
+                          return "<a href='" . $match[0] . "'>" . $match[0] . "</a>";
+                        },
+                        $text
+                      );
+
+                      echo $text;
+                      ?>
+                    </p>
+                  </div>
+                  <hr>
+                  <form class="post-comment-container" action=<?php echo "add_comment.php?post_id=" . $post_id ?> method="POST">
+                    <img src="imgs/account.png" class="account-img" alt="">
+                    <input type="text" name="comment" id="comment" class="post-comment-input">
+                    <input type="submit" value="Post">
+                  </form>
+                  <!-- check if they are some comments for that post -->
+                  <?php
+
+
+                  $sql = "SELECT * FROM comments WHERE comments.post_id = " . $post_id;
+
+                  $comments_res = $conn->query($sql);
+
+                  if ($comments_res->num_rows > 0) {
+                  ?>
+                    <hr>
+                    <div class="post-comments-container">
+                      <?php
+                      while ($comments_row = $comments_res->fetch_assoc()) {
+                      ?>
+                        <div class="comment-container">
+                          <!-- PHP WORK here  -->
+                          <?php
+                          $user_comment_res =  $conn->query("SELECT name, account_image FROM users WHERE users.id = " . $comments_row["user_id"]);
+                          if ($user_comment_res->num_rows > 0) {
+                            $user_comment_row = $user_comment_res->fetch_assoc();
+                            $user_comment_img = $user_comment_row["account_image"];
+                            $user_comment_name = $user_comment_row["name"];
+                            copy($user_comment_img, "./imgs/" . $user_comment_name . ".png");
+                          }
+                          ?>
+                          <!-- comments shows  here  -->
+                          <img src=<?php echo "'./imgs/" . $user_comment_name . ".png'" ?> alt="">
+                          <div>
+                            <span class="comment-user-name"><?php echo $user_comment_name ?></span>
+                            <p class="comment-content">
+                              <?php
+                              $text =  $comments_row["content"];
+
+                              $text = preg_replace_callback(
+                                "/https?:\/\/[^\s]+/",
+                                function ($match) {
+                                  return "<a href='" . $match[0] . "' style='text-decoration: underline; font-weight: 400; '>" . $match[0] . "</a>";
+                                },
+                                $text
+                              );
+
+                              echo $text;
+                              ?>
+                            </p>
+                          </div>
+                        </div>
+                    <?php
+                      }
+                      echo "</div>";
+                    }
+                    ?>
+
+                </article>
+            <?php
+              }
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="people" class="conntainer class-container" style="margin-top: 7rem; display: none;">
+      <?php
+
+      require_once "db_connect.php";
+
+      $sql = "SELECT users.* FROM users INNER JOIN enrollments ON users.id = enrollments.user_id WHERE enrollments.class_id = " . $class_id;
+      $people_res = $conn->query($sql);
+      if ($people_res->num_rows > 0) {
+        while ($row = $people_res->fetch_assoc()) {
+      ?>
+          <div class="row mb-5">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 people">
+              <div>
+                <img src="<?php echo $row['account_image'] ?>" alt="" class="account-img">
+                <span><?php echo $row["name"] ?></span>
+              </div>
+              <span><?php echo $row["email"] ?></span>
+
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+      <?php
+        }
+      }
+      ?>
+    </section>
   </main>
+  <script>
+    const stream = document.getElementById("stream");
+    const people = document.getElementById("people");
+    // Function to show/hide the elements based on the URL fragment identifier
+    function showHideElements() {
+      if (window.location.hash === "#stream") {
+        stream.style.display = "block";
+        people.style.display = "none";
+      } else if (window.location.hash === "#people") {
+        stream.style.display = "none";
+        people.style.display = "block";
+      }
+    }
+    // Call the function initially to show/hide the elements based on the current URL fragment identifier
+    showHideElements();
+    // Add an event listener to the window object to show/hide the elements whenever the URL fragment identifier changes
+    window.addEventListener("hashchange", showHideElements);
+  </script>
   <script>
     var createPostBtn = document.getElementById("create-post-btn");
     var postRow1 = document.querySelector(".post-row-1");

@@ -30,6 +30,7 @@ if (isset($_SESSION['id'])) {
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
   <!-- csss -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style-cours.css">
 </head>
 
 <body onload="load();">
@@ -96,15 +97,16 @@ if (isset($_SESSION['id'])) {
               <a class="btn btn-outline-primary me-2" href="login.php">Sign in</a>
             </li>
             <li class="nav-item">
-              <a class="btn btn-primary" href="join.php">Join</a>
+              <a class="btn btn-primary" href="join.php">Join</a><br>
             </li>
           </ul>
           <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-3" id="account">
             <div class="dropdown-account">
               <button class="drop-btn" type="button">
-                <img src="./imgs/account.jpg" class="account-img" alt="">
+                <img src="./imgs/account.png" class="account-img" alt="">
               </button>
               <div class="dropdown-account-content">
+                <a href="#" id="upload-image-btn">Change Image</a> <br>
                 <a href="logout.php">Log out</a>
               </div>
             </div>
@@ -115,7 +117,53 @@ if (isset($_SESSION['id'])) {
   </header>
 
   <main class="m-3">
-    <section class="hero"></section>
+    <section class="image-upload-section" style="margin-top: 5rem; display: none;">
+      <!-- Upload Image Model -->
+      <form class="image-upload-container" action="change_picture.php" method="post" enctype="multipart/form-data">
+        <input type="file" id="file" name="image" accept="image/*" hidden>
+        <div class="img-area" data-img="">
+          <i class='bx bxs-cloud-upload icon'></i>
+          <h3>Upload Image</h3>
+          <p>Image size must be less than <span>2MB</span></p>
+        </div>
+        <button type="button" class="select-image">Select Image</button>
+        <input type="submit" id="submit_btn" class="btn btn-secondary w-100 m-2 p-3 rounded" name="submit_btn" value="Change Picture">
+      </form>
+      <script>
+        var uploadImageA = document.getElementById("upload-image-btn");
+        const selectImage = document.querySelector('.select-image');
+        const inputFile = document.querySelector('#file');
+        const imgArea = document.querySelector('.img-area');
+
+        uploadImageA.addEventListener("click", function() {
+          document.querySelector(".image-upload-section").style.display = "block";
+        })
+
+        selectImage.addEventListener('click', function() {
+          inputFile.click();
+        })
+
+        inputFile.addEventListener('change', function() {
+          const image = this.files[0]
+          if (image.size < 2000000) {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const allImg = imgArea.querySelectorAll('img');
+              allImg.forEach(item => item.remove());
+              const imgUurl = reader.reslt;
+              const img = document.createElement('img');
+              img.src = imgUrl;
+              imgArea.appendChild(img);
+              imgArea.classList.add('active');
+              imgArea.dataset.img = image.name;
+            }
+            reader.readAsDataURL(image);
+          } else {
+            alert("Image size more than 2MB");
+          }
+        })
+      </script>
+    </section>
     <section class="news" id="news">
       <div class="container">
         <div class="row justify-content-center">

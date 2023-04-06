@@ -95,7 +95,7 @@
             Sign up
           </button>
           <p class="mt-3 mb-3 text-muted">Or</p>
-          <a class="w-100 btn btn-lg btn-secondary" href="login.html">
+          <a class="w-100 btn btn-lg btn-secondary" href="login.php">
             Already have an account ?
           </a>
         </form>
@@ -105,13 +105,18 @@
 
   <script>
     function validateForm() {
+      let email = document.getElementById("email").value;
       let password = document.getElementById("password").value;
       let confirmPassword = document.getElementById("confirm-password").value;
       let errorDiv = document.getElementById("errorDiv");
       let errMsg = "";
 
-      if (password.length < 8) {
-        errMsg += "<p>Passwords too short</p>";
+      if (email.split("@")[1] !== "isikef.u-jendouba.tn") {
+        errMsg += "<p>email must contain @isikef.u-jendouba.tn</p>";
+      }
+
+      if (password.length !== 8) {
+        errMsg += "<p>Password must be your cin</p>";
       }
 
       if (confirmPassword !== password) {

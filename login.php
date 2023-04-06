@@ -44,7 +44,7 @@
       // setup the account image 
 
       $original_img = $_SESSION["account_img_path"];
-      $new_img_path = "./imgs/account.jpg";
+      $new_img_path = "./imgs/account.png";
 
       if (copy($original_img, $new_img_path)) {
         echo "Image Copied";
@@ -106,7 +106,8 @@
   <div class="container" style="margin-top: 9em">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <form method="POST" action="" class="p-4 p-md-5 border rounded-3 bg-light">
+        <form method="POST" action="" class="p-4 p-md-5 border rounded-3 bg-light" onsubmit="return validateForm()">
+          <div id="errorDiv" class="text-danger"></div>
           <div class="form-floating mb-3">
             <select class="form-select" name="role" id="roleSelect">
               <option value="" selected>Select a role</option>
@@ -135,13 +136,36 @@
             Sign in
           </button>
           <p class="mt-3 mb-3 text-muted">Or</p>
-          <a class="w-100 btn btn-lg btn-secondary" href="join.html">
+          <a class="w-100 btn btn-lg btn-secondary" href="join.php">
             Create an account
           </a>
         </form>
       </div>
     </div>
   </div>
+  <script>
+    function validateForm() {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      let errorDiv = document.getElementById("errorDiv");
+      let errMsg = "";
+
+      if (email.split("@")[1] !== "isikef.u-jendouba.tn") {
+        errMsg += "<p>email must contain @isikef.u-jendouba.tn</p>";
+      }
+
+      if (password.length !== 8) {
+        errMsg += "<p>Password must be your cin</p>";
+      }
+
+      if (errMsg !== "") {
+        errorDiv.innerHTML = errMsg;
+        return false;
+      }
+
+      return true;
+    }
+  </script>
 
   <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

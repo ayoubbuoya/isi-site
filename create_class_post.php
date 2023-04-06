@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $colors = array("gr-1", "gr-2", "gr-3", "gr-4", "gr-5", "gr-6");
 
     $class_color = $colors[array_rand($colors)];
-    $class_image = "/home/ayoubamer/Workspace/ISI/Web/Warith/db_imgs/default_class.png";
+    $class_image = "./db_imgs/default_class.png";
 
     echo $class_code . "<br>";
     echo $class_name . "<br>";

@@ -526,6 +526,32 @@ input[type="file"] {
   width: 8rem;
 }
 
+/* Class page */
+.class-code-show {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  /* padding: 1rem; */
+  margin-top: 2rem;
+  border-radius: 1rem;
+  padding-right: 0;
+  margin-right: 1rem;
+}
+
+.people {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 8px 16px 0px #0000006c;
+  padding: 0.5rem;
+  border-radius: 5rem;
+}
+
+.people div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 25%;
+}
+
 /* .join-class-container {
   margin-top: 500px;
 } */
@@ -583,8 +609,6 @@ input[type="file"] {
   color: #fff;
 }
 
-
-
 .item {
   width: 100%;
   background-color: #f2f2f2;
@@ -593,7 +617,5 @@ input[type="file"] {
   margin-bottom: 20px;
   text-align: center;
 }
-
-
 
 /* End Mein */

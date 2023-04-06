@@ -27,7 +27,8 @@ if (isset($_SESSION['id'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
   <!-- Font Awseome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-
+  <!-- Boxicons -->
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style-cours.css" />
 
@@ -108,19 +109,20 @@ if (isset($_SESSION['id'])) {
           <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-3" id="account">
             <div class="dropdown-account">
               <button class="drop-btn" type="button">
-                <img src="./imgs/account.jpg" class="account-img" alt="">
+                <img src="./imgs/account.png" class="account-img" alt="">
               </button>
               <div class="dropdown-account-content">
 
                 <?php
                 if ($_SESSION["role"] == "student") {
                 ?>
-                  <a href="join_class.php">Join class</a>
+                  <a href="join_class.php">Join class</a><br>
                 <?php
                 } elseif ($_SESSION["role"] == "teacher") {
                 ?>
-                  <a href="create_class.php">Create class</a>
+                  <a href="create_class.php">Create class</a><br>
                 <?php } ?>
+                <a href="#" id="upload-image-btn">Change Image</a><br>
                 <a href="logout.php">Log out</a>
               </div>
             </div>
@@ -134,6 +136,17 @@ if (isset($_SESSION['id'])) {
   ?>
     <main class="container h-100">
       <div class="row align-middle">
+        <!-- Upload Image Model -->
+        <form class="image-upload-container" action="change_picture.php" method="post" enctype="multipart/form-data" style="display: none;">
+          <input type="file" id="file" name="image" accept="image/*" hidden>
+          <div class="img-area" data-img="">
+            <i class='bx bxs-cloud-upload icon'></i>
+            <h3>Upload Image</h3>
+            <p>Image size must be less than <span>2MB</span></p>
+          </div>
+          <button type="button" class="select-image">Select Image</button>
+          <input type="submit" id="submit_btn" class="btn btn-secondary w-100 m-2 p-3 rounded" name="submit_btn" value="Change Picture">
+        </form>
         <?php
 
         require_once "db_connect.php";
@@ -143,8 +156,6 @@ if (isset($_SESSION['id'])) {
         if ($_SESSION["role"] === "admin") {
           $sql = "SELECT * FROM classes";
         }
-
-        echo "<script>console.log('$sql');</script>";
 
         $result = $conn->query($sql);
 
@@ -158,7 +169,7 @@ if (isset($_SESSION['id'])) {
               ?>
               <div class="txt">
                 <h1>
-                  <?php echo $row["name"] ?>
+                  <?php echo nl2br($row["name"]) ?>
                 </h1>
                 <p><?php echo $row["description"]; ?></p>
               </div>
@@ -184,6 +195,40 @@ if (isset($_SESSION['id'])) {
   }
   ?>
 
+  </script>
+  <script>
+    var uploadImageA = document.getElementById("upload-image-btn");
+    const selectImage = document.querySelector('.select-image');
+    const inputFile = document.querySelector('#file');
+    const imgArea = document.querySelector('.img-area');
+
+    uploadImageA.addEventListener("click", function() {
+      document.querySelector(".image-upload-container").style.display = "block";
+    })
+
+    selectImage.addEventListener('click', function() {
+      inputFile.click();
+    })
+
+    inputFile.addEventListener('change', function() {
+      const image = this.files[0]
+      if (image.size < 2000000) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const allImg = imgArea.querySelectorAll('img');
+          allImg.forEach(item => item.remove());
+          const imgUrl = reader.result;
+          const img = document.createElement('img');
+          img.src = imgUrl;
+          imgArea.appendChild(img);
+          imgArea.classList.add('active');
+          imgArea.dataset.img = image.name;
+        }
+        reader.readAsDataURL(image);
+      } else {
+        alert("Image size more than 2MB");
+      }
+    })
   </script>
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

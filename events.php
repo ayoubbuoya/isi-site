@@ -105,13 +105,13 @@ if (isset($_SESSION['id'])) {
           <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-3" id="account">
             <div class="dropdown-account">
               <button class="drop-btn" type="button">
-                <img src="./imgs/account.jpg" class="account-img" alt="" />
+                <img src="./imgs/account.png" class="account-img" alt="" />
               </button>
               <div class="dropdown-account-content">
                 <?php
                 if ($_SESSION["role"] == "admin") {
                 ?>
-                  <a href="create_event.php">Create event</a>
+                  <a href="create_event.php">Create event</a><br>
                 <?php } ?>
                 <a href="logout.php">Log out</a>
               </div>
@@ -158,7 +158,7 @@ if (isset($_SESSION['id'])) {
                       <span style="text-transform: uppercase;"><?php echo $date . " " . $month_name ?></span>
                     </div>
                     <a href="#">
-                      <img src="/imgs/event1.png" />
+                      <img src="<?php echo $event_image ?>" />
                     </a>
                   </div>
                   <div class="blog-info" style="min-height: 15rem">

@@ -2,7 +2,7 @@
 
 $org = "/home/ayoubamer/Workspace/ISI/Web/Warith/db_imgs/ayoub.jpg";
 
-$new = "./imgs/account.jpg";
+$new = "./imgs/account.png";
 
 
 if (copy($org, $new)) {
