@@ -18,13 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"])) {
         $sql = "UPDATE users SET account_image = '" . $target_file . "' WHERE id = " . $user_id;
         $result = $conn->query($sql);
         if ($result) {
-            echo "<br> Data Updated";
-            if (copy($target_file, "./imgs/account.png")) {
-                echo "Image Copied";
-                header("Location:  index.php");
-            } else {
-                echo "Erreur While Copying File";
-            }
+            $_SESSION["account-img"] = $target_file;
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
