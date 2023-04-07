@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 06, 2023 at 03:48 PM
+-- Generation Time: Apr 07, 2023 at 04:47 AM
 -- Server version: 8.0.32-0ubuntu0.22.04.2
 -- PHP Version: 8.1.2-1ubuntu2.11
 
@@ -44,7 +44,9 @@ CREATE TABLE `classes` (
 --
 
 INSERT INTO `classes` (`id`, `code`, `name`, `description`, `image`, `color`, `start_date`) VALUES
-(17, 'gOl4s', 'Framework PHP\nLaravel', 'php framework', './db_imgs/default_class.png', 'gr-4', '2023-04-06 09:54:29');
+(18, '1Tehl', 'Framework PHP\nLaravel', 'php framework', './db_imgs/default_class.png', 'gr-4', '2023-04-07 00:50:21'),
+(20, 'EL6I8a', 'Technologies et programmation Web', 'how to use javascript and php ', './db_imgs/default_class.png', 'gr-2', '2023-04-07 01:30:53'),
+(21, 'lZyLZT', 'Recherche d’information ET Indexation', 'indexation', './db_imgs/default_class.png', 'gr-6', '2023-04-07 01:48:42');
 
 -- --------------------------------------------------------
 
@@ -59,6 +61,13 @@ CREATE TABLE `comments` (
   `post_id` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `content`, `user_id`, `post_id`, `created_at`) VALUES
+(14, 'hi tehre', 14, 32, '2023-04-07 01:12:57');
 
 -- --------------------------------------------------------
 
@@ -78,8 +87,13 @@ CREATE TABLE `enrollments` (
 --
 
 INSERT INTO `enrollments` (`id`, `class_id`, `user_id`, `joined_at`) VALUES
-(19, 17, 11, '2023-04-06 09:54:29'),
-(20, 17, 10, '2023-04-06 10:05:56');
+(21, 18, 14, '2023-04-07 00:50:21'),
+(22, 18, 13, '2023-04-07 00:57:01'),
+(23, 19, 14, '2023-04-07 01:29:05'),
+(24, 20, 14, '2023-04-07 01:30:53'),
+(25, 20, 13, '2023-04-07 01:32:17'),
+(26, 21, 14, '2023-04-07 01:48:42'),
+(27, 21, 13, '2023-04-07 01:49:32');
 
 -- --------------------------------------------------------
 
@@ -95,6 +109,13 @@ CREATE TABLE `events` (
   `date` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `name`, `description`, `image`, `date`) VALUES
+(8, 'Formation Laravel', 'come sunday from 20 at 22 at isi kef to this php framework course', 'db_imgs/laravel.png', '2023-04-07 02:40:10');
+
 -- --------------------------------------------------------
 
 --
@@ -104,10 +125,20 @@ CREATE TABLE `events` (
 CREATE TABLE `posts` (
   `id` int NOT NULL,
   `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `file` varchar(255) DEFAULT NULL,
   `class_id` int NOT NULL,
   `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `content`, `file`, `class_id`, `last_updated`, `user_id`) VALUES
+(32, 'hello ', NULL, 18, '2023-04-07 01:09:42', 14),
+(38, 'Isi Site Db Sql : ', 'db_files/isi_site_db.sql', 20, '2023-04-07 02:40:11', 13),
+(39, 'mysql cours  : ', 'db_files/pdo_mysql.pdf', 20, '2023-04-07 02:40:39', 13);
 
 -- --------------------------------------------------------
 
@@ -129,9 +160,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `account_image`, `email`, `password`, `role`) VALUES
-(10, 'Ayoub Amer', 'db_imgs/ayoub amer.png', 'ayoub@isikef.u-jendouba.tn', '14423984', 'student'),
-(11, 'Islem Jerbi', './db_imgs/default_user.png', 'islem@isikef.u-jendouba.tn', '12345678', 'teacher'),
-(12, 'admin', './db_imgs/default_user.png', 'admin@isikef.u-jendouba.tn', '12345678', 'admin');
+(13, 'Ayoub Amer', 'db_imgs/ayoub amer.png', 'ayoub@isikef.u-jendouba.tn', '14423984', 'student'),
+(14, 'Hamdi Bouaziz', './db_imgs/default_user.png', 'hamdi@isikef.u-jendouba.tn', '12345678', 'teacher'),
+(17, 'admin', './db_imgs/default_user.png', 'admin@isikef.u-jendouba.tn', '12345678', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -182,37 +213,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `enrollments`
 --
 ALTER TABLE `enrollments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
