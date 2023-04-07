@@ -16,22 +16,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['name']) && isset($_SESSION['email
     }
 } else {
     // The user is not logged in
-    header("Location: login.html");
+    header("Location: login.php?found=false");
     exit;
 }
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>welcome User</title>
-</head>
-
-<body>
-
-</body>
-
-</html>

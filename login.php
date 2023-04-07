@@ -13,7 +13,31 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 </head>
 
-<body>
+<body onload="load()">
+  <script>
+    function load() {
+      // Get the query string parameters
+      const queryString = window.location.search;
+
+      // Create a new URLSearchParams object from the query string
+      const urlParams = new URLSearchParams(queryString);
+
+      // Check if a parameter exists
+      if (urlParams.has('found')) {
+        // Get the parameter value
+        const found = urlParams.get('found');
+        if (found === "false") {
+          alert("User Not Found");
+        }
+      } else if (urlParams.has('created')) {
+        // Get the parameter value
+        const created = urlParams.get('created');
+        if (created === "true") {
+          alert("User Created Successfuly");
+        }
+      }
+    }
+  </script>
 
   <?php
 
@@ -51,10 +75,11 @@
       } else {
         echo "Erreur While Copying File";
       }
-
       header("Location: welcome_user.php");
     } else {
       echo "<br>User not found";
+      // The user is not logged in
+      header("Location: login.php?found=false");
     }
   }
 

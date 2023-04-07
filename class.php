@@ -14,9 +14,7 @@ if (isset($_SESSION['id'])) {
   $class_code = $row["code"];
   $class_title = str_replace("<br>", " ", $row["name"]);
   // copy the img to the local
-  $org = $row["image"];
-  $class_img = "./imgs/class_" . $row["name"] . ".png";
-  copy($org, $class_img);
+  $class_img = $row["image"];
 }
 
 ?>
@@ -113,12 +111,12 @@ if (isset($_SESSION['id'])) {
           <div class="col-lg-3"></div>
         </div>
         <div class="row post-row-2 hidden">
-          <form class="post-input-container" action=<?php echo "add_post.php?class_id=" . $class_id ?> method="POST">
+          <form class="post-input-container" action=<?php echo "add_post.php?class_id=" . $class_id ?> method="POST" enctype="multipart/form-data">
             <textarea name="post-content" placeholder="announce something to your class" class="post-input"></textarea>
             <label for="file-upload" class="custom-file-upload">
               <i class="fas fa-cloud-upload-alt"><span>Upload File</span></i>
             </label>
-            <input id="file-upload" type="file" />
+            <input id="file-upload" name="file" type="file" />
             <input type="submit" class="btn-submit" value="Post" disabled>
             <input type="button" class="btn-cancel" value="Cancel">
           </form>
@@ -136,6 +134,7 @@ if (isset($_SESSION['id'])) {
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
                 $post_id = $row["id"];
+                $post_file = $row["file"];
 
             ?>
                 <article class="post">
@@ -144,8 +143,7 @@ if (isset($_SESSION['id'])) {
                     $res = $conn->query("SELECT id, name, account_image FROM users WHERE id = " . $row["user_id"]);
                     $user_row = $res->fetch_assoc();
                     // copy the poster image to loclahost
-                    $poster_img = "./imgs/" . $user_row["name"] . ".png";
-                    copy($user_row["account_image"], $poster_img);
+                    $poster_img = $user_row["account_image"];
                     echo "<img src='" . $poster_img . "'>";
                     echo "<div>";
                     echo "<span>" . $user_row["name"] . "</span>";
@@ -169,6 +167,7 @@ if (isset($_SESSION['id'])) {
 
                       echo $text;
                       ?>
+                      <a href="<?php echo $post_file ?>"><?php echo "<br>" . pathinfo($post_file, PATHINFO_FILENAME); ?> </a>
                     </p>
                   </div>
                   <hr>
@@ -200,11 +199,10 @@ if (isset($_SESSION['id'])) {
                             $user_comment_row = $user_comment_res->fetch_assoc();
                             $user_comment_img = $user_comment_row["account_image"];
                             $user_comment_name = $user_comment_row["name"];
-                            copy($user_comment_img, "./imgs/" . $user_comment_name . ".png");
                           }
                           ?>
                           <!-- comments shows  here  -->
-                          <img src=<?php echo "'./imgs/" . $user_comment_name . ".png'" ?> alt="">
+                          <img src=<?php echo "'$user_comment_img'" ?> alt="">
                           <div>
                             <span class="comment-user-name"><?php echo $user_comment_name ?></span>
                             <p class="comment-content">

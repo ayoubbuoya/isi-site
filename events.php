@@ -158,10 +158,10 @@ if (isset($_SESSION['id'])) {
                       <span style="text-transform: uppercase;"><?php echo $date . " " . $month_name ?></span>
                     </div>
                     <a href="#">
-                      <img src="<?php echo $event_image ?>" />
+                      <img style="height: 12rem; width: 20rem;" src="<?php echo $event_image ?>" />
                     </a>
                   </div>
-                  <div class="blog-info" style="min-height: 15rem">
+                  <div class="blog-info" style="min-height: 10rem">
                     <h5>
                       <a href="#" style="text-transform: capitalize;">
                         <?php echo $event_name ?>

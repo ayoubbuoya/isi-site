@@ -28,7 +28,7 @@
 
     if (mysqli_query($conn, $sql)) {
         // redirect to login page 
-        header("Location: login.php");
+        header("Location: login.php?created=true");
         exit;
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);

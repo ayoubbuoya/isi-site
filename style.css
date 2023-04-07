@@ -255,7 +255,7 @@ a {
   -o-transition: ease all 0.35s;
   -webkit-transition: ease all 0.35s;
   transition: ease all 0.35s;
-  width: 60px;
+  width: 8rem;
   height: 60px;
 }
 .contact .px-btn .arrow {

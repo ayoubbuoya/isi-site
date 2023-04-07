@@ -264,9 +264,7 @@ if (isset($_SESSION['id'])) {
                   universitaires de l’université de Jendouba.
                 </p>
                 <div class="sosmed-horizontal pt-3 pb-3">
-                  <a href="#"><i class="fa fa-facebook"></i></a>
-                  <a href="#"><i class="fa fa-instagram"></i></a>
-                  <a href="#"><i class="fa fa-pinterest"></i></a>
+                  <a href="https://www.facebook.com/profile.php?id=100057592473413" target="u_blank"><i class="fa fa-facebook"></i></a>
                 </div>
                 <a href="#" class="btn rey-btn mt-3">See More</a>
               </div>
@@ -387,10 +385,10 @@ if (isset($_SESSION['id'])) {
               <p>+216 78 201 056</p>
             </div>
             <div class="social-share nav">
-              <a href="#" class="facebook">
+              <a href="https://www.facebook.com/profile.php?id=100057592473413" target="u_blank" class="facebook">
                 <i class="fa fa-facebook"></i>
               </a>
-              <a class="linkedin" href="#">
+              <a class="linkedin" href="https://www.linkedin.com/" target="u_blank">
                 <i class="fab fa-linkedin-in"></i>
               </a>
             </div>
