@@ -63,18 +63,10 @@
       $_SESSION["email"] = $row["email"];
       // $_SESSION["password"] = $row["password"];
       $_SESSION["role"] = $row["role"];
-      $_SESSION["account_img_path"] = $row["account_image"];
+      $_SESSION["account-img"] = $row["account_image"];
 
       // setup the account image 
-
-      $original_img = $_SESSION["account_img_path"];
-      $new_img_path = "./imgs/account.png";
-
-      if (copy($original_img, $new_img_path)) {
-        echo "Image Copied";
-      } else {
-        echo "Erreur While Copying File";
-      }
+      $account_img = $_SESSION["account-img"];
       header("Location: welcome_user.php");
     } else {
       echo "<br>User not found";

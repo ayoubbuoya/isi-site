@@ -73,7 +73,7 @@ require_once "db_connect.php";
                     <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-3" id="account">
                         <div class="dropdown-account">
                             <button class="drop-btn" type="button">
-                                <img src="./imgs/account.png" class="account-img" alt="">
+                                <img src="<?php echo $_SESSION["account-img"] ?>" class="account-img" alt="">
                             </button>
                             <div class="dropdown-account-content">
                                 <a href="logout.php">Log out</a>

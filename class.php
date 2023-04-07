@@ -5,6 +5,7 @@ if (isset($_SESSION['id'])) {
   $name = $_SESSION['name'];
   $email = $_SESSION['email'];
   $role = $_SESSION['role'];
+  $account_img = $_SESSION["account-img"]; 
   // get the infos of class
   require_once  "db_connect.php";
 
@@ -70,7 +71,7 @@ if (isset($_SESSION['id'])) {
           <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-3" id="account">
             <div class="dropdown-account">
               <button class="drop-btn" type="button">
-                <img src="./imgs/account.png" class="account-img" alt="" />
+                <img src="<?php echo $account_img ?>" class="account-img" alt="" />
               </button>
               <div class="dropdown-account-content">
                 <a href="index.php">Home</a><br>
@@ -105,7 +106,7 @@ if (isset($_SESSION['id'])) {
           <?php } ?>
 
           <div class="col-lg-6 post-container">
-            <img src="imgs/account.png" class="account-img" alt="">
+            <img src="<?php echo $account_img ?>" class="account-img" alt="">
             <button type="button" id="create-post-btn" class="annouce-btn">annouce something to your class</button>
           </div>
           <div class="col-lg-3"></div>
@@ -172,7 +173,7 @@ if (isset($_SESSION['id'])) {
                   </div>
                   <hr>
                   <form class="post-comment-container" action=<?php echo "add_comment.php?post_id=" . $post_id ?> method="POST">
-                    <img src="imgs/account.png" class="account-img" alt="">
+                    <img src="<?php echo $account_img ?>" class="account-img" alt="">
                     <input type="text" name="comment" id="comment" class="post-comment-input">
                     <input type="submit" value="Post">
                   </form>

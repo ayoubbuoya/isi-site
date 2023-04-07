@@ -6,6 +6,7 @@ if (isset($_SESSION['id'])) {
   $name = $_SESSION['name'];
   $email = $_SESSION['email'];
   $role = $_SESSION['role'];
+  $account_img = $_SESSION["account-img"];
   $logged =  true;
 } else {
   $logged = false;
@@ -103,7 +104,7 @@ if (isset($_SESSION['id'])) {
           <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-3" id="account">
             <div class="dropdown-account">
               <button class="drop-btn" type="button">
-                <img src="./imgs/account.png" class="account-img" alt="">
+                <img src="<?php echo $account_img ?>" class="account-img" alt="">
               </button>
               <div class="dropdown-account-content">
                 <a href="#" id="upload-image-btn">Change Image</a> <br>
