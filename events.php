@@ -67,58 +67,34 @@ if (isset($_SESSION['id'])) {
   <header id="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="index.php">
-          <img src="imgs/islain.png" alt="" class="isi-logo" />
-          <!-- <span class="fs-4">ISI Kef</span> -->
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link me-3 ms-2" href="index.php#news">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-3 ms-2" href="index.php#about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-3 ms-2" href="cours.php">Cours</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-3 ms-2" href="events.php">Events</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-3 ms-2" href="index.php#formations">Nos Formations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-3 ms-2" href="index.php#contact">Contact</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="no-account">
-            <li class="nav-item">
-              <a class="btn btn-outline-primary me-2" href="login.php">Sign in</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-primary" href="join.php">Join</a>
-            </li>
-          </ul>
-          <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-3" id="account">
-            <div class="dropdown-account">
-              <button class="drop-btn" type="button">
-                <img src="<?php echo $account_img ?>" class="account-img" alt="" />
-              </button>
-              <div class="dropdown-account-content">
-                <?php
-                if ($_SESSION["role"] == "admin") {
-                ?>
-                  <a href="create_event.php">Create event</a><br>
-                <?php } ?>
-                <a href="logout.php">Log out</a>
-              </div>
+        <?php
+        require_once("functions.php");
+        headerLinks();
+        ?>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="no-account">
+          <li class="nav-item">
+            <a class="btn btn-outline-primary me-2" href="login.php">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="join.php">Join</a>
+          </li>
+        </ul>
+        <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-3" id="account">
+          <div class="dropdown-account">
+            <button class="drop-btn" type="button">
+              <img src="<?php echo $account_img ?>" class="account-img" alt="" />
+            </button>
+            <div class="dropdown-account-content">
+              <?php
+              if ($_SESSION["role"] == "admin") {
+              ?>
+                <a href="create_event.php">Create event</a><br>
+              <?php } ?>
+              <a href="logout.php">Log out</a>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </nav>
   </header>
