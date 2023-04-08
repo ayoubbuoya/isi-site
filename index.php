@@ -81,17 +81,24 @@ if (isset($_SESSION['id'])) {
               <a class="nav-link me-3 ms-2" href="index.php#about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link me-3 ms-2" href="cours.php">Cours</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-3 ms-2" href="events.php">Events</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link me-3 ms-2" href="index.php#formations">Nos Formations</a>
+            </li>
+            <li class="nav-item">
+              <a href="index.php#gallery" class="nav-link me-3 ms-2">Gallery</a>
             </li>
             <li class="nav-item">
               <a class="nav-link me-3 ms-2" href="index.php#contact">Contact</a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link me-3 ms-2" href="cours.php">Cours</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link me-3 ms-2" href="events.php">Events</a>
+            </li>
+
+
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="no-account">
             <li class="nav-item">
@@ -322,6 +329,25 @@ if (isset($_SESSION['id'])) {
           </div>
         </div>
       </div>
+    </section>
+    <!-- Gallery -->
+    <section id="gallery" class="bg">
+
+      <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+          <img src="imgs/gallery-img3.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <img src="imgs/gallery-img2.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <img src="/imgs/gallery-img1.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
+        </div>
+      </div>
+      <!-- Gallery -->
     </section>
 
     <!-- Contact -->
