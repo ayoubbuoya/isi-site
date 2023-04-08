@@ -300,12 +300,11 @@ if (isset($_SESSION['id'])) {
       </div>
     </section>
     <!-- Gallery -->
-    <section id="gallery" class="bg">
-
+    <section id="gallery">
+      <div class="row mb-5"></div>
       <div class="row">
         <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
           <img src="imgs/gallery-img3.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
-
         </div>
 
         <div class="col-lg-4 mb-4 mb-lg-0">
@@ -314,6 +313,19 @@ if (isset($_SESSION['id'])) {
 
         <div class="col-lg-4 mb-4 mb-lg-0">
           <img src="/imgs/gallery-img1.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+          <img src="imgs/gallery-img4.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <img src="imgs/gallery-img5.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <img src="/imgs/gallery-img6.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
         </div>
       </div>
       <!-- Gallery -->
