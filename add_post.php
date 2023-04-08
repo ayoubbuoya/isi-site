@@ -9,13 +9,29 @@ $user_id = $_SESSION["id"];
 $post_content = $_POST["post-content"];
 $post_file = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
 $file_ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+if (!empty($_FILES['file']['name'])) {
+    // move the uploaded file to the specified directory
+    $target_file = "db_files/" . strtolower($post_file) . "." . $file_ext;
 
-// move the uploaded file to the specified directory
-$target_file = "db_files/" . strtolower($post_file) . "." . $file_ext;
+    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+        echo "The file " . $post_file . " has been uploaded.";
+        $sql = "INSERT INTO posts(content, class_id, user_id, file) VALUES ('" . $post_content . "', " . $class_id . ", " . $user_id . ", '" . $target_file . "')";
 
-if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-    echo "The file " . $post_file . " has been uploaded.";
-    $sql = "INSERT INTO posts(content, class_id, user_id, file) VALUES ('" . $post_content . "', " . $class_id . ", " . $user_id . ", '" . $target_file . "')";
+        $result = $conn->query($sql);
+        // Check for errors
+        if (!$result) {
+            die("Insert query failed: " . mysqli_error($conn));
+        } else {
+            echo "Data inserted successfully!";
+            // redirect to the class page
+            header("Location: class.php?id=" . $class_id);
+        }
+    } else {
+        echo "There was an error uploading your file.";
+        echo "<br>" . $_FILES['file']['name'] ."<br>"; 
+    }
+} else {
+    $sql = "INSERT INTO posts(content, class_id, user_id) VALUES ('" . $post_content . "', " . $class_id . ", " . $user_id . ")";
 
     $result = $conn->query($sql);
     // Check for errors
@@ -26,7 +42,4 @@ if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
         // redirect to the class page
         header("Location: class.php?id=" . $class_id);
     }
-} else {
-    echo "There was an error uploading your file.";
-    echo "<br>" . $target_file; 
 }
