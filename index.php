@@ -344,7 +344,7 @@ if (isset($_SESSION['id'])) {
         <div class="row flex-row-reverse">
           <div class="col-md-7 col-lg-8 m-15px-tb">
             <div class="contact-form">
-              <form action="/" method="post" class="contactform contact_form" id="contact_form">
+              <form action="https://formspree.io/f/xqkogadj" method="post" class="contactform contact_form" id="contact_form">
                 <div class="returnmessage valid-feedback p-15px-b" data-success="Your message has been received, We will contact you soon."></div>
                 <div class="empty_notice invalid-feedback p-15px-b">
                   <span>Please Fill Required Fields</span>
@@ -352,27 +352,27 @@ if (isset($_SESSION['id'])) {
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input id="name" type="text" placeholder="Full Name" class="form-control" />
+                      <input name="name" id="name" type="text" placeholder="Full Name" class="form-control" required />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input id="email" type="text" placeholder="Email Address" class="form-control" />
+                      <input name="email" id="email" type="text" placeholder="Email Address" class="form-control" required />
                     </div>
                   </div>
                   <div class="col-12">
                     <div class="form-group">
-                      <input id="subject" type="text" placeholder="Subject" class="form-control" />
+                      <input name="subject" id="subject" type="text" placeholder="Subject" class="form-control" required />
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <textarea id="message" placeholder="Message" class="form-control" rows="3"></textarea>
+                      <textarea name="message" id="message" placeholder="Message" class="form-control" rows="3" required></textarea>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="send">
-                      <a id="send_message" class="px-btn theme" href="#"><span>Contact Us</span> <i class="arrow"></i></a>
+                      <button type="submit" id="send_message" class="px-btn theme" href="#"><span>Contact Us</span> <i class="arrow"></i></button>
                     </div>
                   </div>
                 </div>
