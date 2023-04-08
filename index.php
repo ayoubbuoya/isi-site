@@ -93,7 +93,7 @@ if (isset($_SESSION['id'])) {
     </nav>
   </header>
 
-  <main class="m-3">
+  <main class="m-3 mb-0">
     <section class="image-upload-section" style="margin-top: 5rem; display: none;">
       <!-- Upload Image Model -->
       <form class="image-upload-container" action="change_picture.php" method="post" enctype="multipart/form-data">
@@ -405,6 +405,30 @@ if (isset($_SESSION['id'])) {
       </div>
     </section>
   </main>
+  <footer class="bg-light text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn text-white btn-floating m-1" style="background-color: #3b5998;" href="https://www.facebook.com/ayoub.buoya.3762/" target="u_blank" role="button"><i class="fab fa-facebook-f"></i></a>
+        <!-- Linkedin -->
+        <a class="btn text-white btn-floating m-1" style="background-color: #0082ca;" href="https://www.linkedin.com/in/ayoub-amer-285b67190/" target="u_blank" role="button"><i class="fab fa-linkedin-in"></i></a>
+        <!-- Github -->
+        <a class="btn text-white btn-floating m-1" style="background-color: #333333;" href="https://github.com/ayoubbuoya" target="u_blank" role="button"><i class="fab fa-github"></i></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); letter-spacing: 0.2rem;font-weight: bold; ">
+      © 2023 Copyright :
+      <a class="text-white" href="https://ayoub-amer.netlify.app/" target="u_blank"> <span class="">Ayoub Amer</span></a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+
   <script>
     const filterBtns = document.querySelectorAll('.filter-btn');
     const items = document.querySelectorAll('.item');
