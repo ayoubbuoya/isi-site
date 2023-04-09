@@ -304,7 +304,7 @@ if (isset($_SESSION['id'])) {
       <div class="row mb-5"></div>
       <div class="row">
         <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-          <img src="imgs/gallery-img3.png" class="w-100 h-75 shadow-1-strong rounded mb-4 img-hover" alt=""/>
+          <img src="imgs/gallery-img3.png" class="w-100 h-75 shadow-1-strong rounded mb-4 img-hover" alt="" />
         </div>
 
         <div class="col-lg-4 mb-4 mb-lg-0">
@@ -410,6 +410,7 @@ if (isset($_SESSION['id'])) {
     </section>
   </main>
   <footer class="bg-light text-center text-white">
+
     <!-- Grid container -->
     <div class="container p-4 pb-0">
       <!-- Section: Social media -->
@@ -425,6 +426,9 @@ if (isset($_SESSION['id'])) {
     </div>
     <!-- Grid container -->
 
+    <!-- Back to top button -->
+    <button id="back-to-top-btn" class="btn btn-primary" title="Go to top" style="float: right;margin-top: -2.4rem"><i class="fas fa-arrow-up"></i></button>
+
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); letter-spacing: 0.2rem;font-weight: bold; ">
       © 2023 Copyright :
@@ -432,6 +436,26 @@ if (isset($_SESSION['id'])) {
     </div>
     <!-- Copyright -->
   </footer>
+  <script>
+    var backToTopBtn = document.getElementById("back-to-top-btn");
+
+    // Show or hide the button based on scroll position
+    window.addEventListener("scroll", function() {
+      if (window.pageYOffset > 100) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    // Scroll to top when the button is clicked
+    backToTopBtn.addEventListener("click", function() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
 
   <script>
     const filterBtns = document.querySelectorAll('.filter-btn');

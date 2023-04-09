@@ -52,12 +52,14 @@
     $password = $_POST["password"];
     $role = $_POST["role"];
 
-    $sql = "SELECT * FROM users WHERE email = '" . $email . "' AND password = '" . $password . "' AND role = '" . $role . "';";
-
+    // Retrieve hashed password from database
+    $sql = "SELECT * FROM users WHERE email = '" . $email . "' AND role = '" . $role . "';";
+    
     $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) == 1) {
-      $row = mysqli_fetch_assoc($result);
+    $row = mysqli_fetch_assoc($result);
+    $hashed_password = $row['password'];
+    echo $hashed_password;
+    if (password_verify($password, $hashed_password)) {
       $_SESSION["id"] = $row["id"];
       $_SESSION["name"] = $row["name"];
       $_SESSION["email"] = $row["email"];

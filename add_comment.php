@@ -9,7 +9,7 @@ $user_id = $_SESSION["id"];
 $comment_content = $_POST["comment"];
 
 
-$sql = "INSERT INTO comments(content, post_id, user_id) VALUES ('" . $comment_content . "', " . $post_id . ", " . $user_id . ")";
+$sql = "INSERT INTO comments(content, post_id, user_id) VALUES ('" . str_replace("'", "\'", $comment_content) . "', " . $post_id . ", " . $user_id . ")";
 
 $result = $conn->query($sql);
 

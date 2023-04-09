@@ -161,7 +161,7 @@ if (isset($_SESSION['id'])) {
                       $text = preg_replace_callback(
                         "/https?:\/\/[^\s]+/",
                         function ($match) {
-                          return "<a href='" . $match[0] . "'>" . $match[0] . "</a>";
+                          return "<a href='" . $match[0] . "' target='u_blank'>" . $match[0] . "</a>";
                         },
                         $text
                       );

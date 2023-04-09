@@ -19,10 +19,7 @@
     $password = $_POST["password"];
     $role = $_POST["role"];
 
-    // echo "<br />" . "Name : " . $name;
-    // echo "<br />" . "Email : " . $email;
-    // echo "<br />" . "Password : " . $password;
-    // echo "<br />" . "Role : " . $role;
+    $password = password_hash($password, PASSWORD_DEFAULT); 
 
     $sql = "INSERT INTO users(name, email, password, role) VALUES ('$name', '$email', '$password', '$role');";
 
