@@ -13,7 +13,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 </head>
 
-<body>
+<body onload="load()">
+  <script>
+    function load() {
+      // Get the query string parameters
+      const queryString = window.location.search;
+
+      // Create a new URLSearchParams object from the query string
+      const urlParams = new URLSearchParams(queryString);
+
+      // Check if a parameter exists
+      if (urlParams.has('email_used')) {
+        // Get the parameter value
+        const emailUsed = urlParams.get('email_used');
+        if (emailUsed == "true") {
+          alert("Email Already Taken.");
+        }
+      }
+    }
+  </script>
+
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div class="container-fluid">

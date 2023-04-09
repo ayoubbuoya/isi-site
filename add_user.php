@@ -19,12 +19,21 @@
     $password = $_POST["password"];
     $role = $_POST["role"];
 
-    $password = password_hash($password, PASSWORD_DEFAULT); 
+    /* check if email is used before */
+    $sql = "SELECT * FROM users WHERE email = '$email'";
+
+    if ($conn->query($sql)->num_rows > 0) {
+        // redirect to login page 
+        header("Location: join.php?email_used=true");
+        exit;
+    }
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO users(name, email, password, role) VALUES ('$name', '$email', '$password', '$role');";
 
     if (mysqli_query($conn, $sql)) {
-        // redirect to login page 
+        // redirect to join page 
         header("Location: login.php?created=true");
         exit;
     } else {
