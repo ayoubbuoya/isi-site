@@ -518,7 +518,7 @@ if (isset($_SESSION['id'])) {
                             <img src="<?php echo $account_img ?>" class="account-img" alt="">
                         </button>
                         <div class="dropdown-account-content">
-                            <a href="#" id="upload-image-btn">Change Image</a> <br>
+                            <a href="index.php">Home</a> <br>
                             <a href="logout.php">Log out</a>
                         </div>
                     </div>

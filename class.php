@@ -96,7 +96,7 @@ if (isset($_SESSION['id'])) {
         <div class="row post-row-1">
           <div class="col-lg-1"></div>
 
-          <?php if ($role === "teacher") { ?>
+          <?php if ($role === "teacher"|| $role === "admin" ) { ?>
             <div class="col-lg-2 class-code-show">
               <h5>Class Code : </h5>
               <p style="color: #222; text-align: center; font-size: 1.5rem"><?php echo $class_code;  ?></p>
