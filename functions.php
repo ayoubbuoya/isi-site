@@ -25,7 +25,7 @@ function headerLinks()
         <a href="index.php#gallery" class="nav-link me-3 ms-2">Gallery</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link me-3 ms-2" href="index.php#map">Map</a>
+        <a class="nav-link me-3 ms-2" href="index.php#map">Location</a>
       </li>
       <li class="nav-item">
         <a class="nav-link me-3 ms-2" href="index.php#contact">Contact</a>
