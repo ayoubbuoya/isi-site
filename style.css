@@ -618,4 +618,10 @@ input[type="file"] {
   text-align: center;
 }
 
+.img-hover:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
 /* End Mein */

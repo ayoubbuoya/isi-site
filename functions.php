@@ -2,8 +2,8 @@
 
 function headerLinks()
 {
-    echo '
-    <a class="navbar-brand d-flex align-items-center me-5" href="index.php">
+  echo '
+    <a class="navbar-brand d-flex align-items-center me-3" href="index.php">
     <img src="imgs/islain.png" alt="" class="isi-logo" />
     <!-- <span class="fs-4">ISI Kef</span> -->
     </a>
@@ -25,15 +25,20 @@ function headerLinks()
         <a href="index.php#gallery" class="nav-link me-3 ms-2">Gallery</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link me-3 ms-2" href="index.php#map">Map</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link me-3 ms-2" href="index.php#contact">Contact</a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link me-3 ms-2" href="cours.php">Cours</a>
       </li>
-
       <li class="nav-item">
         <a class="nav-link me-3 ms-2" href="events.php">Events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link me-3 ms-2" href="calendar.php">Calendar</a>
       </li>
     </ul>   
     ';

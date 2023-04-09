@@ -89,6 +89,8 @@ if (isset($_SESSION['id'])) {
               if ($_SESSION["role"] == "admin") {
               ?>
                 <a href="create_event.php">Create event</a><br>
+                <a href="#deleteEventModal" data-bs-toggle="modal" data-bs-target="#deleteEventModal<?php echo $event_id ?>">Delete Event</a>
+                <br>
               <?php } ?>
               <a href="logout.php">Log out</a>
             </div>
@@ -100,6 +102,7 @@ if (isset($_SESSION['id'])) {
   </header>
 
   <main>
+    <!-- Start Event Section -->
     <section class="news" id="news">
       <div class="container">
         <div class="row justify-content-center">
@@ -163,6 +166,59 @@ if (isset($_SESSION['id'])) {
         </div>
       </div>
     </section>
+    <!-- Pop Up Delete Event -->
+    <div class="modal fade" id="deleteEventModal" tabindex="-1" aria-labelledby="deleteEventModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteEventModalLabel">Delete Event</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="deleteEventForm">
+              <div class="mb-3">
+                <label for="eventSelect" class="form-label">Select Event to Delete:</label>
+                <select class="form-select" id="eventSelect" name="event_id">
+                  <?php
+                  $sql = "SELECT id, name FROM events";
+                  $res = $conn->query($sql);
+                  if ($res->num_rows > 0) {
+                    while ($row = $res->fetch_assoc()) {
+                      $event_id = $row["id"];
+                      $event_name = $row["name"];
+                      echo "<option value='$event_id'>$event_name</option>";
+                    }
+                  }
+                  ?>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-danger">Delete Event</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Handle form submission
+      document.getElementById("deleteEventForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        var event_id = document.getElementById("eventSelect").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "delete_event.php");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            // Reload the page to update the event list
+            location.reload();
+          } else {
+            alert("Error deleting event");
+          }
+        };
+        xhr.send("event_id=" + encodeURIComponent(event_id));
+      });
+    </script>
+
   </main>
 
   <!-- Bootstrap -->

@@ -304,31 +304,35 @@ if (isset($_SESSION['id'])) {
       <div class="row mb-5"></div>
       <div class="row">
         <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-          <img src="imgs/gallery-img3.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+          <img src="imgs/gallery-img3.png" class="w-100 h-75 shadow-1-strong rounded mb-4 img-hover" alt=""/>
         </div>
 
         <div class="col-lg-4 mb-4 mb-lg-0">
-          <img src="imgs/gallery-img2.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+          <img src="imgs/gallery-img2.png" class="w-100 h-75 shadow-1-strong rounded mb-4 img-hover" alt="" />
         </div>
 
         <div class="col-lg-4 mb-4 mb-lg-0">
-          <img src="/imgs/gallery-img1.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
+          <img src="/imgs/gallery-img1.png" class="w-100 h-75 shadow-1-strong rounded mb-4 img-hover" alt="Waves at Sea" />
         </div>
       </div>
       <div class="row">
         <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-          <img src="imgs/gallery-img4.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+          <img src="imgs/gallery-img4.png" class="w-100 h-75 shadow-1-strong rounded mb-4 img-hover" alt="" />
         </div>
 
         <div class="col-lg-4 mb-4 mb-lg-0">
-          <img src="imgs/gallery-img5.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+          <img src="imgs/gallery-img5.png" class="w-100 h-75 shadow-1-strong rounded mb-4 img-hover" alt="" />
         </div>
 
         <div class="col-lg-4 mb-4 mb-lg-0">
-          <img src="/imgs/gallery-img6.png" class="w-100 h-75 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
+          <img src="/imgs/gallery-img6.png" class="w-100 h-75 shadow-1-strong rounded mb-4 img-hover" alt="Waves at Sea" />
         </div>
       </div>
       <!-- Gallery -->
+    </section>
+    <!-- Google Map -->
+    <section id="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3220.4881692950116!2d8.707579675757698!3d36.17900780246981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fba44eb16009e5%3A0xea46e94b9ed2cde8!2sHigher%20Institute%20of%20Computer%20Science%20of%20Kef!5e0!3m2!1sen!2stn!4v1681000256462!5m2!1sen!2stn" style="border:0;width: 75%;height: 80vh; margin:2rem 11rem; margin-top: 5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
     <!-- Contact -->
