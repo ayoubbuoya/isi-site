@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"]  === "POST") {
 
     $event_name = $_POST["event-name"];
     $event_description = $_POST["event-description"];
+    $event_date = $_POST["event-date"];
     $event_image = pathinfo($_FILES['event-image']['name'], PATHINFO_FILENAME);
 
     // move the uploaded file to the specified directory
@@ -25,7 +26,8 @@ if ($_SERVER["REQUEST_METHOD"]  === "POST") {
     if (move_uploaded_file($_FILES["event-image"]["tmp_name"], $target_file)) {
         echo "The file " . $event_image . " has been uploaded.";
         require_once "db_connect.php";
-        $sql = "INSERT INTO events (name, description, image) VALUES ('$event_name', '$event_description', '$target_file')";
+        // $sql = "INSERT INTO events (name, description, image) VALUES ('$event_name', '$event_description', '$target_file')";
+        $sql = "INSERT INTO events (name, description, image, date) VALUES ('$event_name', '$event_description', '$target_file', '$event_date')";
         $result = $conn->query($sql);
         if ($result > 0) {
             echo "Event inserted";
@@ -192,6 +194,11 @@ if ($_SERVER["REQUEST_METHOD"]  === "POST") {
                         <div class="form-floating mb-3">
                             <textarea class="form-control" id="event-description" name="event-description" placeholder="Event Description" required></textarea>
                             <label for="event-description">Event Description</label>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="event-date" class="form-label">Event Date</label>
+                            <input type="date" class="form-control" id="event-date" name="event-date">
                         </div>
 
                         <label for="custom-file-upload" class="filupp form-floating mt-3 mb-3">
