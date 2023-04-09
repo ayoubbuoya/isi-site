@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 09, 2023 at 02:46 PM
+-- Generation Time: Apr 09, 2023 at 03:41 PM
 -- Server version: 8.0.32-0ubuntu0.22.04.2
 -- PHP Version: 8.1.2-1ubuntu2.11
 
@@ -95,9 +95,9 @@ INSERT INTO `enrollments` (`id`, `class_id`, `user_id`, `joined_at`) VALUES
 CREATE TABLE `events` (
   `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
-  `description` text,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `date` datetime DEFAULT CURRENT_TIMESTAMP
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -105,7 +105,8 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `name`, `description`, `image`, `date`) VALUES
-(8, 'Formation Laravel', 'come sunday from 20 at 22 at isi kef to this php framework course', 'db_imgs/laravel.png', '2023-04-07 02:40:10');
+(8, 'Formation Laravel', 'come sunday from 20 at 22 at isi kef to this php framework course', 'db_imgs/laravel.png', '2023-04-07 02:40:10'),
+(9, 'Formation Javascript', 'learn basics of js + dom manipulation ', 'db_imgs/js.png', '2023-04-12 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -222,7 +223,7 @@ ALTER TABLE `enrollments`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `posts`
