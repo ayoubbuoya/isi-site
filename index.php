@@ -427,7 +427,7 @@ if (isset($_SESSION['id'])) {
     <!-- Grid container -->
 
     <!-- Back to top button -->
-    <button id="back-to-top-btn" class="btn btn-primary" title="Go to top" style="float: right;margin-top: -2.4rem"><i class="fas fa-arrow-up"></i></button>
+    <button id="back-to-top-btn" class="btn btn-primary" title="Go to top" style="float: right;margin-top: -2.4rem; margin-right: 1rem"><i class="fas fa-arrow-up w-100"></i></button>
 
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); letter-spacing: 0.2rem;font-weight: bold; ">
