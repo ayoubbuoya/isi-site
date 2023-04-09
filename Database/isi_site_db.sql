@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 07, 2023 at 04:47 AM
+-- Generation Time: Apr 09, 2023 at 02:46 PM
 -- Server version: 8.0.32-0ubuntu0.22.04.2
 -- PHP Version: 8.1.2-1ubuntu2.11
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `isi_site_db`
 --
-CREATE DATABASE IF NOT EXISTS `isi_site_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `isi_site_db`;
 
 -- --------------------------------------------------------
 
@@ -31,22 +29,22 @@ USE `isi_site_db`;
 
 CREATE TABLE `classes` (
   `id` int NOT NULL,
-  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT './db_imgs/default_class.png',
-  `color` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` text,
+  `image` varchar(255) NOT NULL DEFAULT './db_imgs/default_class.png',
+  `color` varchar(50) NOT NULL,
   `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `classes`
 --
 
 INSERT INTO `classes` (`id`, `code`, `name`, `description`, `image`, `color`, `start_date`) VALUES
-(18, '1Tehl', 'Framework PHP\nLaravel', 'php framework', './db_imgs/default_class.png', 'gr-4', '2023-04-07 00:50:21'),
-(20, 'EL6I8a', 'Technologies et programmation Web', 'how to use javascript and php ', './db_imgs/default_class.png', 'gr-2', '2023-04-07 01:30:53'),
-(21, 'lZyLZT', 'Recherche d’information ET Indexation', 'indexation', './db_imgs/default_class.png', 'gr-6', '2023-04-07 01:48:42');
+(22, 'M5NEbK', 'Framework PHP\nLaravel', 'learn basic backend concepts with laravel ', './db_imgs/default_class.png', 'gr-4', '2023-04-09 11:45:43'),
+(23, 'hMo6N', 'Technologies Et \nProgrammation Web', 'learn js and php technologies', './db_imgs/default_class.png', 'gr-2', '2023-04-09 11:54:46'),
+(24, 'OhZyoj', 'Recherche d\' information', 'information et indexation', './db_imgs/default_class.png', 'gr-1', '2023-04-09 12:21:58');
 
 -- --------------------------------------------------------
 
@@ -56,18 +54,11 @@ INSERT INTO `classes` (`id`, `code`, `name`, `description`, `image`, `color`, `s
 
 CREATE TABLE `comments` (
   `id` int NOT NULL,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `content` text NOT NULL,
   `user_id` int NOT NULL,
   `post_id` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `content`, `user_id`, `post_id`, `created_at`) VALUES
-(14, 'hi tehre', 14, 32, '2023-04-07 01:12:57');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -80,20 +71,20 @@ CREATE TABLE `enrollments` (
   `class_id` int NOT NULL,
   `user_id` int NOT NULL,
   `joined_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `enrollments`
 --
 
 INSERT INTO `enrollments` (`id`, `class_id`, `user_id`, `joined_at`) VALUES
-(21, 18, 14, '2023-04-07 00:50:21'),
-(22, 18, 13, '2023-04-07 00:57:01'),
-(23, 19, 14, '2023-04-07 01:29:05'),
-(24, 20, 14, '2023-04-07 01:30:53'),
-(25, 20, 13, '2023-04-07 01:32:17'),
-(26, 21, 14, '2023-04-07 01:48:42'),
-(27, 21, 13, '2023-04-07 01:49:32');
+(28, 22, 20, '2023-04-09 11:45:43'),
+(29, 23, 21, '2023-04-09 11:54:46'),
+(30, 23, 19, '2023-04-09 11:57:53'),
+(31, 22, 19, '2023-04-09 11:58:42'),
+(32, 23, 22, '2023-04-09 12:05:14'),
+(33, 24, 20, '2023-04-09 12:21:58'),
+(34, 24, 19, '2023-04-09 12:23:04');
 
 -- --------------------------------------------------------
 
@@ -103,11 +94,11 @@ INSERT INTO `enrollments` (`id`, `class_id`, `user_id`, `joined_at`) VALUES
 
 CREATE TABLE `events` (
   `id` int NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  `image` varchar(255) DEFAULT NULL,
   `date` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `events`
@@ -124,21 +115,19 @@ INSERT INTO `events` (`id`, `name`, `description`, `image`, `date`) VALUES
 
 CREATE TABLE `posts` (
   `id` int NOT NULL,
-  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `content` mediumtext NOT NULL,
   `file` varchar(255) DEFAULT NULL,
   `class_id` int NOT NULL,
   `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `content`, `file`, `class_id`, `last_updated`, `user_id`) VALUES
-(32, 'hello ', NULL, 18, '2023-04-07 01:09:42', 14),
-(38, 'Isi Site Db Sql : ', 'db_files/isi_site_db.sql', 20, '2023-04-07 02:40:11', 13),
-(39, 'mysql cours  : ', 'db_files/pdo_mysql.pdf', 20, '2023-04-07 02:40:39', 13);
+(42, 'New Material', 'db_files/pdo_mysql.pdf', 23, '2023-04-09 11:56:35', 21);
 
 -- --------------------------------------------------------
 
@@ -148,21 +137,23 @@ INSERT INTO `posts` (`id`, `content`, `file`, `class_id`, `last_updated`, `user_
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `account_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT './db_imgs/default_user.png',
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `name` varchar(255) NOT NULL,
+  `account_image` varchar(255) NOT NULL DEFAULT './db_imgs/default_user.png',
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `account_image`, `email`, `password`, `role`) VALUES
-(13, 'Ayoub Amer', 'db_imgs/ayoub amer.png', 'ayoub@isikef.u-jendouba.tn', '14423984', 'student'),
-(14, 'Hamdi Bouaziz', './db_imgs/default_user.png', 'hamdi@isikef.u-jendouba.tn', '12345678', 'teacher'),
-(17, 'admin', './db_imgs/default_user.png', 'admin@isikef.u-jendouba.tn', '12345678', 'admin');
+(19, 'Ayoub Amer', 'db_imgs/ayoub amer.png', 'ayoub@isikef.u-jendouba.tn', '$2y$10$yoBu1CPAjW.Oc1CYIVw45OtjVhYL2.40dq3.CPqpuPmk5O2t2VEz.', 'student'),
+(20, 'Hamdi Bouaziz', 'db_imgs/hamdi bouaziz.png', 'hamdi@isikef.u-jendouba.tn', '$2y$10$KZGPgBzuMVUpkoZ6hbzuK.whUYrv1AF7IX1K.3w4xiTueqm370ruW', 'teacher'),
+(21, 'Adem Jerbi', 'db_imgs/adem jerbi.png', 'adem@isikef.u-jendouba.tn', '$2y$10$C9xa8Xn5rk1yOqfXXiIAje5reN7v60viY6PaZ6Pu2qF4MDijmnNm2', 'teacher'),
+(22, 'Islem Jerbi', 'db_imgs/islem jerbi.png', 'islem@isikef.u-jendouba.tn', '$2y$10$/LbKajCHn6NUe..Wg1AiE.V3KJ49rQ/4PAouf53vcfOF8Xcg4W7Fq', 'student'),
+(23, 'Admin', 'db_imgs/admin.png', 'admin@isikef.u-jendouba.tn', '$2y$10$WAEfrs7Hf1S5YT6zrT3jpuwF06Fd/.A0LA5fdhx.q3WD.4Ygff9/m', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -213,19 +204,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `enrollments`
 --
 ALTER TABLE `enrollments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -237,13 +228,13 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
